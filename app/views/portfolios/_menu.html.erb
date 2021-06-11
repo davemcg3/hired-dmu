@@ -1,0 +1,6 @@
+<div>
+  <span><%= button_to 'Show', portfolio, method: :get %></span>
+  <span><%= button_to 'Edit', edit_portfolio_path(portfolio), method: :get %></span>
+  <span><%= button_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <hr />
+</div>

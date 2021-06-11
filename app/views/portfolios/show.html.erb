@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<nav>
+  <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
+  <%= link_to 'Back', portfolios_path %>
+</nav>
+
+<%= turbo_frame_tag dom_id(@portfolio) do %>
+  <p>
+    <strong>Description:</strong>
+    <%= @portfolio.description %>
+  </p>
+
+  <p>
+    <strong>Cta:</strong>
+    <%= @portfolio.cta %>
+  </p>
+  <%= render 'menu', portfolio: @portfolio %>
+<% end %>

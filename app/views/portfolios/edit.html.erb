@@ -1,0 +1,9 @@
+<h1>Editing Portfolio</h1>
+
+
+<%= turbo_frame_tag dom_id(@portfolio) do %>
+  <%= render 'form', portfolio: @portfolio %>
+<% end %>
+
+<%= link_to 'Show', @portfolio %> |
+<%= link_to 'Back', portfolios_path %>

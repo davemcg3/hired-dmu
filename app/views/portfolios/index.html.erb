@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Portfolios</h1>
+<nav>
+  <%= link_to 'New Portfolio', new_portfolio_path %>
+</nav>
+
+<br>
+
+<div>
+  <hr />
+  <%= turbo_stream_from "portfolios" %>
+  <%= turbo_frame_tag "portfolios" do %>
+    <%= render @portfolios %>
+  <% end %>
+</div>
+
