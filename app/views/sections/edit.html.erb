@@ -1,0 +1,13 @@
+<h1>Editing Section</h1>
+
+<%= turbo_stream_from "sections" %>
+<!--TODO: Fix bug here on the way these forms are nested. After save you lose the other sections on the page until reload.-->
+<%= turbo_frame_tag "sections" do %>
+  <%= turbo_frame_tag dom_id(@section) do %>
+    <%= render 'form', section: @section %>
+  <% end %>
+<% end %>
+
+<%= link_to 'Show', @section %> |
+<%= link_to 'Back', sections_path %>
+<%= link_to 'View Portfolio', portfolio_path(1) %>

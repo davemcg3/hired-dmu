@@ -3,11 +3,20 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios or /portfolios.json
   def index
-    @portfolios = Portfolio.all.order(created_at: :desc)
+    @portfolios = Portfolio.where(private:false).order(created_at: :desc)
   end
 
   # GET /portfolios/1 or /portfolios/1.json
   def show
+    respond_to do |format|
+      if @portfolio.private
+        format.html { flash[:notice] = "Portfolio is marked private." and redirect_to action: :index }
+        format.json { render :show, status: :created, location: {} }
+      else
+        format.html { render :show }
+        format.json { render :show, status: :created, location: @portfolio }
+      end
+    end
   end
 
   # GET /portfolios/new
@@ -64,6 +73,6 @@ class PortfoliosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portfolio_params
-      params.require(:portfolio).permit(:description, :cta)
+      params.require(:portfolio).permit(:description, :private)
     end
 end

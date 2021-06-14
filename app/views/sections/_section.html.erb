@@ -1,0 +1,15 @@
+<% section = @section if section.nil? && @section.present? %>
+
+<%= turbo_frame_tag dom_id(section) do %>
+  <hr />
+
+  <h2><%= section.headline %></h2>
+
+  <p>
+    <%= section.body %>
+  </p>
+
+  <%= link_to section.cta_text, section.cta_link, target: :_blank %>
+<% end %>
+
+<%= render 'sections/menu', section: section %>

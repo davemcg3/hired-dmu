@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_004140) do
+ActiveRecord::Schema.define(version: 2021_06_14_230951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,11 +55,23 @@ ActiveRecord::Schema.define(version: 2021_06_11_004140) do
 
   create_table "portfolios", force: :cascade do |t|
     t.string "description"
-    t.string "cta"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "private", default: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "headline"
+    t.text "body"
+    t.string "cta_text"
+    t.string "cta_link"
+    t.bigint "portfolio_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["portfolio_id"], name: "index_sections_on_portfolio_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "sections", "portfolios"
 end

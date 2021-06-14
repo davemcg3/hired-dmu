@@ -6,14 +6,22 @@
 </nav>
 
 <%= turbo_frame_tag dom_id(@portfolio) do %>
+<!--  Change to display name once we have users-->
+  <h1>Portfolio</h1>
   <p>
-    <strong>Description:</strong>
     <%= @portfolio.description %>
   </p>
 
-  <p>
-    <strong>Cta:</strong>
-    <%= @portfolio.cta %>
-  </p>
+<!--  <p>-->
+<!--    <strong>Cta:</strong>-->
+    <%#= @portfolio.cta %>
+<!--  </p>-->
+
+  <%= turbo_frame_tag "sections" do %>
+    <% @portfolio.sections.each do |section| %>
+      <%= render 'sections/section', :section => section %>
+    <% end %>
+  <% end %>
+
   <%= render 'menu', portfolio: @portfolio %>
 <% end %>

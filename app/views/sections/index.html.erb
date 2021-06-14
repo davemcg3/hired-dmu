@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sections</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Headline</th>
+      <th>Body</th>
+      <th>Cta text</th>
+      <th>Cta link</th>
+      <th>Portfolio</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= section.headline %></td>
+        <td><%= section.body %></td>
+        <td><%= section.cta_text %></td>
+        <td><%= section.cta_link %></td>
+        <td><%= section.portfolio_id %></td>
+        <td><%= link_to 'Show', section %></td>
+        <td><%= link_to 'Edit', edit_section_path(section) %></td>
+        <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Section', new_section_path %>
+<%= link_to 'View Portfolio', portfolio_path(1) %>

@@ -1,0 +1,43 @@
+<%= form_with(model: section) do |form| %>
+  <% if section.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(section.errors.count, "error") %> prohibited this section from being saved:</h2>
+
+      <ul>
+        <% section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :headline %>
+    <%= form.rich_text_area :headline %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.rich_text_area :body %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cta_text %>
+    <%= form.text_field :cta_text %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cta_link %>
+    <%= form.text_field :cta_link %>
+  </div>
+
+<!--  This becomes moot once we have current_user because we'll derive from that and each user can only have 1 portfolio-->
+  <div class="field">
+    <%= form.label :portfolio_id %>
+    <%= form.text_field :portfolio_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
