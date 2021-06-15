@@ -1,5 +1,6 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio, only: %i[ show edit update destroy ]
+  before_action :redirect_if_not_owner, only: %i[ edit update destroy ]
 
   # GET /portfolios or /portfolios.json
   def index
@@ -9,7 +10,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/1 or /portfolios/1.json
   def show
     respond_to do |format|
-      if @portfolio.private
+      if @portfolio.private and @portfolio.user != current_user
         format.html { flash[:notice] = "Portfolio is marked private." and redirect_to action: :index }
         format.json { render :show, status: :created, location: {} }
       else
@@ -30,7 +31,7 @@ class PortfoliosController < ApplicationController
 
   # POST /portfolios or /portfolios.json
   def create
-    @portfolio = Portfolio.new(portfolio_params)
+    @portfolio = Portfolio.new(portfolio_params.merge({user: current_user}))
 
     respond_to do |format|
       if @portfolio.save
@@ -70,6 +71,10 @@ class PortfoliosController < ApplicationController
     def set_portfolio
       @portfolio = Portfolio.find(params[:id])
     end
+
+  def redirect_if_not_owner
+    redirect_to @portfolio unless current_user == @portfolio.user
+  end
 
     # Only allow a list of trusted parameters through.
     def portfolio_params

@@ -1,3 +1,50 @@
 // Place all the styles related to the Portfolios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.card {
+  border: 1px solid black;
+  margin: 0 1em 1em 0;
+  width: 400px;
+}
+
+.cardHeader {
+  border-bottom: 1px dashed black;
+  padding: 1em;
+}
+
+.cardBody {
+  padding: 1em;
+}
+
+.cardFooter {
+  border-top: 1px dashed black;
+  padding: 1em;
+}
+
+.cardFooter a, .cardFooter a:visited, .portfolioMenu a, .portfolioMenu a:visited {
+  text-align: center;
+  background-color: rgb(239, 239, 239);
+  color: #000;
+  padding: 1px 6px;
+  border-width: 1px;
+  border-style: outset;
+  border-color: rgb(118, 118, 118);
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.cardFooter a:hover, .portfolioMenu a:hover {
+  background-color: rgb(230, 230, 230 );
+}
+
+
+.portfolioMenu {
+  //display: flex;
+  //flex-direction: row;
+  //flex-wrap: wrap;
+  //justify-content: space-between;
+
+  form {
+    display: inline;
+  }
+}

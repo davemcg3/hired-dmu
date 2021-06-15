@@ -1,18 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Portfolios</h1>
-<nav>
-  <%= link_to 'New Portfolio', new_portfolio_path %>
-</nav>
-
-<br>
+<% if current_user.present? && current_user.portfolio.nil? %>
+  <nav>
+    <%= (link_to 'New Portfolio', new_portfolio_path) %>
+  </nav>
+<% elsif current_user.present? && current_user.portfolio.present? && current_user.portfolio.private %>
+  <nav>
+    <%= (link_to 'Edit Portfolio', edit_portfolio_path(current_user.portfolio)) %>
+  </nav>
+<% end %>
 
 <div>
-  <hr />
   <%= turbo_stream_from "portfolios" %>
   <%= turbo_stream_from "sections" %>
   <%= turbo_frame_tag "portfolios" do %>
-    <%= render @portfolios %>
+    <% if @portfolios.present? %>
+      <%= render @portfolios, user: current_user %>
+    <% elsif current_user.portfolio.present? %>
+      <%= turbo_frame_tag dom_id(current_user.portfolio) do %>
+        <%= NoPortfoliosMessage(current_user).html_safe %>
+      <% end %>
+    <% else %>
+      <%= NoPortfoliosMessage(current_user).html_safe %>
+    <% end %>
   <% end %>
 </div>
 

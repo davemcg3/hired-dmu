@@ -11,6 +11,24 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="header">
+      <a href="/">
+        <h1>Hired</h1>
+      </a>
+      <Signin>
+        <% if current_user.present? %>
+          <%= getLoginBanner(current_user) %>
+          <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= button_to user_twitter_omniauth_authorize_path, method: :post, data: {turbo: "false"} do %>
+            <%= image_tag("sign-in-with-twitter-gray.png.twimg.1920.png", alt: "Sign in with Twitter") %>
+          <% end %>
+        <% end %>
+      </Signin>
+    </header>
+
+    <main class="main">
+      <%= yield %>
+    </main>
   </body>
 </html>

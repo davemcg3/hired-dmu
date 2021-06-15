@@ -1,9 +1,10 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: %i[ show edit update destroy ]
+  before_action :redirect_if_not_owner, only: %i[ edit update destroy ]
 
   # GET /sections or /sections.json
   def index
-    @sections = Section.all
+    redirect_to(portfolios_path)
   end
 
   # GET /sections/1 or /sections/1.json
@@ -21,7 +22,7 @@ class SectionsController < ApplicationController
 
   # POST /sections or /sections.json
   def create
-    @section = Section.new(section_params)
+    @section = Section.new(section_params.merge({user: current_user, portfolio: current_user.portfolio}))
 
     respond_to do |format|
       if @section.save
@@ -51,7 +52,7 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: "Section was successfully destroyed." }
+      format.html { redirect_to portfolios_path, notice: "Section was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -60,6 +61,10 @@ class SectionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_section
       @section = Section.find(params[:id])
+    end
+
+    def redirect_if_not_owner
+      redirect_to @section unless current_user == @section.user
     end
 
     # Only allow a list of trusted parameters through.

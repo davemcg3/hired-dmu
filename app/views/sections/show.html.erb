@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'section' %>
+<%= render 'section', user: current_user %>
 
-<%= link_to 'Edit', edit_section_path(@section) %> |
-<%= link_to 'Back', sections_path %>
-<%= link_to 'View Portfolio', portfolio_path(1) %>
+<%= link_to 'View Portfolio', portfolio_path(@section.portfolio) %>

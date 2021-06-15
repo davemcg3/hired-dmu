@@ -8,6 +8,4 @@
   <% end %>
 <% end %>
 
-<%= link_to 'Show', @section %> |
-<%= link_to 'Back', sections_path %>
-<%= link_to 'View Portfolio', portfolio_path(1) %>
+<%= link_to 'View Portfolio', portfolio_path(@section.portfolio) %>

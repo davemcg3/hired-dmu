@@ -1,6 +1,6 @@
-<hr />
-<div>
-  <span><%= button_to 'Edit Section', edit_section_path(section), method: :get %></span>
-  <span><%= button_to 'Destroy Section', section, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-  <hr />
-</div>
+<% if user.present? && user == section.user %>
+  <div class="sectionMenu">
+    <span><%= button_to 'Edit Section', edit_section_path(section), method: :get %></span>
+    <span><%= button_to 'Destroy Section', section, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  </div>
+<% end %>

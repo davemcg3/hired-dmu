@@ -1,8 +1,10 @@
-<hr />
-<div>
-  <span><%= link_to 'Show', portfolio, target: :_top %></span>
-  <span><%= button_to 'Edit', edit_portfolio_path(portfolio), method: :get %></span>
-  <span><%= link_to 'Add Section', new_section_path, target: :_top %></span>
-  <span><%= button_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-  <hr />
+<div class="portfolioMenu">
+  <% if action_name != "show" %>
+    <span><%= link_to 'Show', portfolio, target: :_top %></span>
+  <% end %>
+  <% if user.present? && user == portfolio.user %>
+    <span><%= button_to 'Edit', edit_portfolio_path(portfolio), method: :get %></span>
+    <span><%= link_to 'Add Section', new_section_path, target: :_top %></span>
+    <span><%= button_to 'Destroy', portfolio, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <% end %>
 </div>

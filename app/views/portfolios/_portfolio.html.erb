@@ -1,6 +1,21 @@
 <%= turbo_frame_tag dom_id(portfolio) do %>
-  <div>
-    <%= portfolio.description %>
-  </div>
-  <%= render 'portfolios/menu', portfolio: portfolio %>
+  <% if portfolio.private? %>
+    <div class="card">
+      <div class="cardBody">
+        <p>There's some tricky UI issues with hotwire, like "if the list becomes empty after an edit but we're not re-rendering the index page how does it know to generate the empty list page?" Go ahead and refresh the page. Marking this as a bug in my app.</p>
+      </div>
+    </div>
+  <% else %>
+    <div class="card">
+      <div class="cardHeader">
+        <%= link_to portfolio.user.name, "https://twitter.com/" + portfolio.user.username, target: :_blank %>
+      </div>
+      <div class="cardBody">
+        <%= portfolio.description %>
+      </div>
+      <div class="cardFooter">
+        <%= render 'portfolios/menu', portfolio: portfolio, user: user %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

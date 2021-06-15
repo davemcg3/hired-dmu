@@ -1,27 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<nav>
-  <%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
-  <%= link_to 'Back', portfolios_path %>
-</nav>
+<% if current_user.present? && @portfolio.user == current_user %>
+  <nav>
+    <%= link_to 'Edit', edit_portfolio_path(@portfolio) %>
+  </nav>
+<% end %>
 
 <%= turbo_frame_tag dom_id(@portfolio) do %>
-<!--  Change to display name once we have users-->
-  <h1>Portfolio</h1>
+  <h1><%= link_to @portfolio.user.name, "https://twitter.com/" + @portfolio.user.username, target: :_blank %></h1>
   <p>
     <%= @portfolio.description %>
   </p>
 
-<!--  <p>-->
-<!--    <strong>Cta:</strong>-->
-    <%#= @portfolio.cta %>
-<!--  </p>-->
+  <%= render 'menu', portfolio: @portfolio, user: current_user %>
 
   <%= turbo_frame_tag "sections" do %>
     <% @portfolio.sections.each do |section| %>
-      <%= render 'sections/section', :section => section %>
+      <%= render 'sections/section', :section => section, user: current_user %>
     <% end %>
   <% end %>
 
-  <%= render 'menu', portfolio: @portfolio %>
 <% end %>

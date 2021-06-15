@@ -13,3 +13,39 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  margin: 0;
+}
+
+.header {
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 1em 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.header a, .header a:visited, .header a:active {
+  color: #fff;
+}
+
+.header a:hover {
+  color: #bbb;
+}
+
+.header h1 {
+  display: inline;
+}
+
+Signin button {
+  border: none;
+  padding: 0;
+}
+
+.main {
+  margin: 2em;
+}
