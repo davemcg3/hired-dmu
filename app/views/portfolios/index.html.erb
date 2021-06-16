@@ -17,7 +17,7 @@
   <%= turbo_frame_tag "portfolios" do %>
     <% if @portfolios.present? %>
       <%= render @portfolios, user: current_user %>
-    <% elsif current_user.portfolio.present? %>
+    <% elsif current_user.present? && current_user.portfolio.present? %>
       <%= turbo_frame_tag dom_id(current_user.portfolio) do %>
         <%= NoPortfoliosMessage(current_user).html_safe %>
       <% end %>
