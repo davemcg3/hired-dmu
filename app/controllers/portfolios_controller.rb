@@ -9,6 +9,7 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1 or /portfolios/1.json
   def show
+    redirect_to portfolios_path and return if @portfolio.nil?
     respond_to do |format|
       if @portfolio.private and @portfolio.user != current_user
         format.html { flash[:notice] = "Portfolio is marked private." and redirect_to action: :index }
@@ -69,7 +70,7 @@ class PortfoliosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_portfolio
-      @portfolio = Portfolio.find(params[:id])
+      @portfolio = Portfolio.find_by_id(params[:id])
     end
 
   def redirect_if_not_owner
