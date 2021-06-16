@@ -77,7 +77,7 @@ class PortfoliosController < ApplicationController
     end
 
   def redirect_if_not_owner
-    redirect_to @portfolio unless current_user == @portfolio.user
+    redirect_to @portfolio or portfolios_path unless current_user.present? and current_user == @portfolio.try(:user)
   end
 
     # Only allow a list of trusted parameters through.
