@@ -28,6 +28,7 @@ class PortfoliosController < ApplicationController
 
   # GET /portfolios/1/edit
   def edit
+    redirect_to portfolios_path and return if @portfolio.nil?
   end
 
   # POST /portfolios or /portfolios.json
@@ -47,6 +48,7 @@ class PortfoliosController < ApplicationController
 
   # PATCH/PUT /portfolios/1 or /portfolios/1.json
   def update
+    redirect_to portfolios_path and return if @portfolio.nil?
     respond_to do |format|
       if @portfolio.update(portfolio_params)
         format.html { redirect_to @portfolio, notice: "Portfolio was successfully updated." }
@@ -60,6 +62,7 @@ class PortfoliosController < ApplicationController
 
   # DELETE /portfolios/1 or /portfolios/1.json
   def destroy
+    redirect_to portfolios_path and return if @portfolio.nil?
     @portfolio.destroy
     respond_to do |format|
       format.html { redirect_to portfolios_url, notice: "Portfolio was successfully destroyed." }
